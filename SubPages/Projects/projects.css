@@ -1,0 +1,339 @@
+/* projects.css - styles for selected + grid */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Roboto:wght@300;400&display=swap');
+
+/* base */
+* {
+  font-family: "Poppins", "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+:root {
+  --bg: #1f242d;
+  --panel: #323946;
+  --text: #fff;
+  --muted: #bfcbd6;
+  --accent: #0ef;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  /* background: rgba(0, 0, 0, var(--bg-darkness, 0.4)) */
+}
+.container {
+  /* max-width: 1100px; */
+  margin: 16px auto;
+  padding: 20px;
+}
+
+/* back link */
+.back {
+  display: inline-block;
+  color: var(--text);
+  opacity: 0.9;
+  margin-bottom: 18px;
+  text-decoration: none;
+}
+
+/* selected project section */
+#selectedContainer {
+  margin-bottom: 30px;
+}
+.project-card {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  background: var(--panel);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+}
+.project-media {
+  /* flex: 0 0 420px; */
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0a0a0a;
+  min-height: 260px;
+  height: 315px;
+  width: 560px;
+  aspect-ratio: 16/9;
+}
+.project-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.project-body {
+  flex: 1;
+  padding: 4px 2px;
+}
+.project-title {
+  font-size: 32px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.project-meta {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+.project-desc {
+  color: #e6eef6;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  white-space: pre-wrap;
+}
+.project-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.tag {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #cfe;
+  font-size: 13px;
+}
+.project-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+.btn {
+  background: var(--accent);
+  color: #000;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  cursor:alias;
+}
+.btn.secondary {
+  background: transparent;
+  color: #cce;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+}
+
+.social-media a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    background: transparent;
+    border: .15rem solid var(--accent);
+    border-radius: 50%;
+    font-size: 1.5rem;
+    color: var(--accent);
+    /* margin: 3rem 1.5rem 3rem 0; */
+    margin: 1rem 1rem 0rem 0;
+    text-decoration: none;
+    transition: 0.5s ease;
+}
+.social-media a:hover{
+    background: var(--accent);
+    color: var(--bg);
+    box-shadow: 0 0 1.5rem var(--accent);
+
+}
+
+.social-media{
+    position: relative;
+}
+
+
+
+/* heading for other projects */
+#allProjectsSection {
+  margin-top: 36px;
+}
+#allProjectsSection .heading {
+  font-size: 22px;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+#allProjectsSection .heading span {
+  color: var(--accent);
+}
+
+/* bottom grid (cards) similar to landing */
+/* .portfolio-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+} */
+.portfolio-container {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    align-items: center;
+    gap: 2.5rem;
+}
+.portfolio-box {
+
+  min-width: 320px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  background: #0d1114;
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.14s ease;
+
+position: relative;
+    /* border-radius: 2rem; */
+    box-shadow: 0 0 1rem var(--bg-color);
+    overflow: hidden;
+    /* display: flex; */
+
+    box-shadow: 3px 8px 20px 3px rgba(255, 255, 255, 0.11);
+}
+
+
+
+.portfolio-box:hover {
+  transform: translateY(-6px);
+  scale: 1.02;
+  transition: 0.45s ease;
+}
+.portfolio-box img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+}
+.portfolio-layer {
+  padding: 14px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.45), transparent);
+  color: var(--text);
+  min-height: 110px;
+}
+.portfolio-layer h4 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+}
+.portfolio-layer p {
+  margin: 0;
+  font-size: 14px;
+  color: #d8e7f0;
+}
+.portfolio-layer a.link-btn {
+  /* position: absolute; */
+  right: 12px;
+  bottom: 12px;
+  display: inline-block;
+  background: var(--accent);
+  color: #000;
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+/* empty / messages */
+.empty {
+  text-align: center;
+  padding: 28px;
+  color: #cfe;
+}
+
+
+.lilCrdDes{
+    display: flex;
+    justify-content: space-between;
+}
+.lilCrdDes a {
+    height: 2.5rem;
+}
+
+
+
+
+/* responsive */
+@media (min-width: 2200px) {
+  .portfolio-container {
+    
+    grid-template-columns: repeat(6,1fr);
+    
+}
+}
+@media (max-width: 2200px) {
+  .portfolio-container {
+    
+    grid-template-columns: repeat(5,1fr);
+    
+}
+}
+@media (max-width: 1700px) {
+  .portfolio-container {
+    
+    grid-template-columns: repeat(4,1fr);
+    
+}
+}
+@media (max-width: 1420px) {
+  .portfolio-container {
+    
+    grid-template-columns: repeat(3,1fr);
+    
+}
+}
+@media (max-width: 1070px) {
+  .portfolio-container {
+    
+    grid-template-columns: repeat(2,1fr);
+    
+}
+}
+@media (max-width: 880px) {
+  .project-card {
+    flex-direction: column;
+  }
+  /* .project-media {
+    width: 100%;
+    height: 220px;
+  } */
+  /* .portfolio-box {
+    width: calc(50% - 9px);
+  } */
+}
+
+@media (max-width: 710px) {
+  .portfolio-container {
+    
+    grid-template-columns: repeat(1,1fr);
+    
+}
+}
+@media (max-width: 635px) {
+  .project-media{
+    width: max-content;
+    height: fit-content;
+    min-height: fit-content;
+    width: 84vw;
+  }
+  /* .project-card{
+    padding: 0.7rem;
+  } */
+}
+
+@media (max-width: 520px) {
+  .portfolio-box {
+    width: 100%;
+  }
+  .project-title {
+    font-size: 22px;
+  }
+  .project-card{
+    padding: 0.7rem;
+  }
+}
+
+
