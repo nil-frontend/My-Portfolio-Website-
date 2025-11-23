@@ -2,10 +2,13 @@
 // 13/11/2025
 // https://docs.google.com/spreadsheets/d/14P1DtYJ53opsDNh_IJT4HaK_TEOv_ca97VPcmc-BjA8/edit?gid=22235903#gid=22235903
 // projects-loader.js
+// https://docs.google.com/spreadsheets/d/1q4wpFrsbYbd3pDU2k8RKkiCTt0A-CGwG/edit?usp=sharing&ouid=110147846712567429914&rtpof=true&sd=true
 // Fetches a published Google Sheet and renders portfolio cards into #portfolioContainer
 // CHANGE: replace SPREADSHEET_ID with your sheet id
-const SPREADSHEET_ID = '14P1DtYJ53opsDNh_IJT4HaK_TEOv_ca97VPcmc-BjA8';
-const SHEET_NAME = 'projects_extended'; // optional: 'Sheet1' or leave empty to use default
+// const SPREADSHEET_ID = '14P1DtYJ53opsDNh_IJT4HaK_TEOv_ca97VPcmc-BjA8';
+// const SHEET_NAME = 'projects_extended'; // optional: 'Sheet1' or leave empty to use default
+const SPREADSHEET_ID = '1q4wpFrsbYbd3pDU2k8RKkiCTt0A-CGwG';
+const SHEET_NAME = 'projects_details'; // optional: 'Sheet1' or leave empty to use default
 
 // --- Helper: fetch Google Sheet published as gviz JSON and return array of objects
 async function fetchSheetAsObjects(spreadsheetId, sheetName = '') {
@@ -53,7 +56,7 @@ function createCardNode(project) {
   const title = project.title || '';
   const description = project.description || '';
   // prefer image url from sheet, fallback to placeholder
-  const image = project.image || project.img || '';
+  const image = project.image || project.img || 'portfolio pic/Optimized-pic/portfolio1 done.jpg';
   const externalUrl = project.external_url || project.url || '#';
 
   const card = document.createElement('div');
@@ -63,7 +66,7 @@ function createCardNode(project) {
 
   // inner HTML: matches your original structure (img + .portfolio-layer)
   card.innerHTML = `
-    <img src="${escapeHtml(image)}" alt="${escapeHtml(title)}" onerror="this.style.opacity=.6;this.src='';">
+    <img src="${escapeHtml(image)}" alt="${escapeHtml(title)}" onerror="this.style.opacity=.6;this.src='portfolio pic/Optimized-pic/portfolio1 done.jpg';">
     <div class="portfolio-layer">
       <h4>${escapeHtml(title)}</h4>
       <p>${escapeHtml(description)}</p>
@@ -144,20 +147,21 @@ function dataReStructure(rawRows) {
 
 // --- Main init: fetch sheet and render cards
 async function initPortfolio() {
-    console.log("object")
+    // console.log("object")
   const container = document.getElementById('portfolioContainer');
   if (!container) return;
 
   container.innerHTML = '<p>Loading projects…</p>';
   try {
     const projects = await fetchSheetAsObjects(SPREADSHEET_ID, SHEET_NAME);
-    console.log(projects)
+    // console.log(projects)
     if (!projects || projects.length === 0) {
       container.innerHTML = '<p>No projects found in the sheet.</p>';
       return;
     }
     const projectDataReStructured = dataReStructure(projects);
-    console.log(projectDataReStructured)
+    // const projectDataReStructured = projects;
+    // console.log(projectDataReStructured)
     // clear container then append a card for each project
     container.innerHTML = '';
     projectDataReStructured.forEach(proj => {

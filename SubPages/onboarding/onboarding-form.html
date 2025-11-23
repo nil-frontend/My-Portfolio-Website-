@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Client Onboarding | NiL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --bg-main: #11161d;
+      --bg-card: #1c2430;
+      --accent: #00e6ff;
+      --accent-soft: rgba(0, 230, 255, 0.15);
+      --text-main: #f5f7fb;
+      --text-muted: #a9b3c5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: var(--bg-main);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+
+    .onboard-wrapper {
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    .onboard-card {
+      background: var(--bg-card);
+      border-radius: 24px;
+      padding: 36px 28px 32px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .onboard-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(0, 230, 255, 0.6);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .onboard-header h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .onboard-header p {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* CTA row */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 22px 0 10px;
+    }
+
+    .pill {
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text-muted);
+    }
+
+    .pill span {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* Form container (responsive iframe) */
+    .form-shell {
+      margin-top: 20px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #0c1117;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .iframe-ratio {
+      position: relative;
+      width: 100%;
+      padding-bottom: 130%; /* taller for mobile, adjust if needed */
+    }
+
+    .iframe-ratio iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Back to main site button (optional) */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #021016;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      box-shadow: 0 10px 30px rgba(0, 230, 255, 0.4);
+    }
+
+    .back-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 40px rgba(0, 230, 255, 0.6);
+      background: #24f0ff;
+    }
+
+    .back-link span {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    @media (min-width: 768px) {
+      .onboard-card {
+        padding: 40px 40px 36px;
+      }
+
+      .onboard-header h1 {
+        font-size: 36px;
+      }
+
+      .iframe-ratio {
+        padding-bottom: 100%; /* slightly shorter on larger screens */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="onboard-wrapper">
+    <div class="onboard-card">
+
+      <div class="onboard-header">
+        <div class="badge">
+          <span>Onboarding</span>
+        </div>
+        <h1>Start Your Project with <span class="highlight">NiL</span></h1>
+        <p>
+          Share a few details about your project so I can tailor my
+          <span class="highlight">Web Development</span>,
+          <span class="highlight">SaaS</span>,
+          <span class="highlight">Consultancy</span>,
+          <span class="highlight">Hacking</span>, or
+          <span class="highlight">Video Editing</span>
+          services to your needs.
+        </p>
+        <div class="cta-row">
+          <div class="pill">⏱️ Takes about <span>3–5 minutes</span></div>
+          <div class="pill">🛡️ Your information is kept <span>confidential</span></div>
+        </div>
+      </div>
+
+      <div class="form-shell">
+        <div class="iframe-ratio">
+          <!-- 🔽 PASTE YOUR GOOGLE FORM EMBED URL IN src BELOW -->
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfZ9o1wFqiqZYlHJYoIEYw0Zjm_h3gFFOI2H1uNP_oo91qliw/viewform?embedded=true"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            loading="lazy">
+              Loading…
+          </iframe>
+        </div>
+      </div>
+      <!-- https://docs.google.com/forms/d/e/1FAIpQLSfZ9o1wFqiqZYlHJYoIEYw0Zjm_h3gFFOI2H1uNP_oo91qliw/viewform -->
+<!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfZ9o1wFqiqZYlHJYoIEYw0Zjm_h3gFFOI2H1uNP_oo91qliw/viewform?embedded=true" width="640" height="5228" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe> -->
+      <!-- Optional: link back to home page -->
+      <a href="index.html" class="back-link">
+        <span>←</span> Back to Portfolio
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>

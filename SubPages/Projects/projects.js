@@ -1,9 +1,9 @@
 // projects.js - selected + list + pushState navigation
 const CONFIG = {
-  SPREADSHEET_ID: "14P1DtYJ53opsDNh_IJT4HaK_TEOv_ca97VPcmc-BjA8", // <-- replace
-  SHEET_NAME: "projects_extended"
+  SPREADSHEET_ID: "1q4wpFrsbYbd3pDU2k8RKkiCTt0A-CGwG", // <-- replace
+  SHEET_NAME: "projects_details"
 };
-
+// https://docs.google.com/spreadsheets/d/1q4wpFrsbYbd3pDU2k8RKkiCTt0A-CGwG/edit?usp=sharing&ouid=110147846712567429914&rtpof=true&sd=true
 /* ---------- small helpers ---------- */
 function escapeHtml(s=''){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]); }
 function normalizeKey(k){ return String(k||'').trim().toLowerCase().replace(/\s+/g,'_').replace(/[^\w_]/g,'').replace(/_+/g,'_').replace(/^_+|_+$/g,''); }
@@ -118,6 +118,20 @@ function dataReStructure(rawRows) {
 
 /* ---------- render selected project (top) ---------- */
 function renderSelected(project){
+  //setting the webpage title at the top of the tab {Projects - Project_name}
+    // const title = document.title;
+    document.title = `${project.title? `Project - ${project.title}` : ""}` 
+    // document.metadata = `${project.description? `Project - ${project.description}` : ""}` 
+    //// 🔲it append it as html append() function appends it as a string so it will not work we have to add it like the html with the existing code inside the <head> tag. 
+    document.head.innerHTML+= `
+         <meta name='description' content=${project.description} />
+         <meta property='og:locale' content='en_US' />
+         <meta property='og:type' content='website' />
+         <meta property='og:title' content=${project.title} />
+         <meta property='og:description' content=${project.description} />
+    `;
+    
+
   const sel = document.getElementById('selectedContainer');
   if(!project){
     sel.innerHTML = '<div class="empty">Project not found.</div>';
@@ -125,9 +139,10 @@ function renderSelected(project){
   }
   const mainBody = document.querySelector("body")
   const tagsHtml = (project.tags||'').split(',').map(t=>t.trim()).filter(Boolean).map(t=>`<span class="tag">${escapeHtml(t)}</span>`).join('');
+  const technologiesHtml = (project.technologies||'').split(',').map(t=>t.trim()).filter(Boolean).map(t=>`<span class="tag">${escapeHtml(t)}</span>`).join('');
   const imageSrc = project.image ? (project.image.startsWith('http') ? project.image : fixImageUrl(project.image)) : '';
 // console.log(project)
-  const embedLink = project.embedLink? project.embedLink : "https://www.youtube-nocookie.com/embed/FWfxb3Qh2L0?si=xfXFvvZvE9zfXlv9?controls=0&autoplay=1&mute=1";
+  const embedLink = project.embedlink? project.embedlink : "https://www.youtube-nocookie.com/embed/FWfxb3Qh2L0?si=xfXFvvZvE9zfXlv9?controls=0&autoplay=1&mute=1";
   const projectLiveLink =project.liveLink? project.liveLink : "https://github.com/nil-frontend";
 
   if (imageSrc) {
@@ -139,14 +154,29 @@ function renderSelected(project){
   }
 // social links of projects
 
-
   sel.innerHTML = `
     <div class="project-card">
-      <div class="project-media">
-        ${
-          //<img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(project.title)}" onerror="this.src='https://via.placeholder.com/800x480?text=No+image'">
-          ``}
-        <iframe width="100%" height="100%" src="${escapeHtml(embedLink)}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <div class="media-social">
+        <div class="project-media">
+          ${
+            //<img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(project.title)}" onerror="this.src='https://via.placeholder.com/800x480?text=No+image'">
+            ``}
+          <iframe width="100%" height="100%" src="${escapeHtml(embedLink)}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="techStack" >
+            <h3>Tech Stacks: </h3>
+            <div class="project-tags">${technologiesHtml}</div>
+        </div>
+        <div class="social-media-under">
+                    ${project.fbLink ? `<a href="${project.fbLink}" target="_blank"> <i class='bx bxl-facebook'> </i> </a>`:''}
+                    ${project.xLink ? `<a href="${project.xLink}" target="_blank"> <i class='bx bxl-twitter' > </i></a>`:''}
+                    ${project.ytLink ? `<a href="${project.ytLink}" target="_blank"> <i class='bx bxl-youtube'></i></a>`:`<a href="https://www.youtube.com/@NiLTheDeveloper" target="_blank"> <i class='bx bxl-youtube'></i></a>`}
+                    ${project.instaLink ? `<a href="${project.instaLink}" target="_blank"> <i class='bx bxl-instagram' > </i></a>`:`<a href="https://instagram.com/nil___003_?igshid=MzRlODBiNWFlZA==" target="_blank"> <i class='bx bxl-instagram' > </i></a>`}
+                    ${project.linkedinLink ? `<a href="${project.linkedinLink}" target="_blank"> <i class='bx bxl-linkedin' > </i></a>`:`<a href="https://www.linkedin.com/in/nilkantha-dwibedi-58a687279" target="_blank"> <i class='bx bxl-linkedin' > </i></a>`}
+                    ${project.githubLink ? `<a href="${project.githubLink}" target="_blank"> <i class='bx bxl-github' > </i></a>`:`<a href="https://github.com/nil-frontend" target="_blank"> <i class='bx bxl-github' > </i></a>`}
+                    ${project.codePenLink ? `<a href="${project.codePenLink}" target="_blank"> <i class='bx bxl-codepen' > </i></a>`:''}
+                    <a href="mailto:feedbacknil@gmail.com" target="_blank"> <i class='bx bxl-gmail' > </i></a>
+        </div>
       </div>
       <div class="project-body">
         <div class="project-title">${escapeHtml(project.title)}</div>
@@ -193,14 +223,20 @@ function renderAllProjectsGrid(allProjects, currentId){
     const isCurrent = String(p.id||'').toLowerCase() === String(currentId||'').toLowerCase();
     const img = p.image ? (p.image.startsWith('http') ? p.image : fixImageUrl(p.image)) : '';
 
-    const box = document.createElement('div');
-    box.className = 'portfolio-box';
-    if(isCurrent) box.style.opacity = '0.7';
-    if(isCurrent) box.style.border = 'solid #0ef';
+    //18/11/2025
+    //isCurrent return true or false that it is currently selected project or not. so if it is current project compare the current project with url id if wi get true it will go out of the if statement and don't create any portfolio box. And if it return Falsy value then it is not current project then execute the code and show it in "Other Projects" section
+    if(isCurrent != true){
+      const box = document.createElement('div');
+      box.className = 'portfolio-box';
+      if(isCurrent) box.style.opacity = '0.7';
+      if(isCurrent) box.style.border = 'solid #0ef';
+    
+    
     
 
     box.innerHTML = `
-      <img src="${escapeHtml(img)}" alt="${escapeHtml(p.title)}">
+
+      ${img? (`<img id="t" src="${escapeHtml(img)}" alt="${escapeHtml(p.title)}" onerror="this.style.opacity=.6;this.src='${escapeHtml('/portfolio pic/Optimized-pic/portfolio1 done.jpg')}';" >`) :`<img alt="Default_IMG" src="${fixImageUrl("portfolio pic/Optimized-pic/portfolio2.jpg")}">`}
       <div class="portfolio-layer">
         <h4>${escapeHtml(p.title)}</h4>
         <div class="lilCrdDes">
@@ -234,6 +270,7 @@ function renderAllProjectsGrid(allProjects, currentId){
     }
 
     container.appendChild(box);
+    }
   });
 }
 
@@ -253,6 +290,8 @@ function renderAllProjectsGrid(allProjects, currentId){
   try {
     // fetch sheet
     const table = await fetchGviz(CONFIG.SPREADSHEET_ID, CONFIG.SHEET_NAME).catch(()=>null);
+
+    
     let projectsP = [];
     if(table) projectsP = normalizeTable(table);
     else {
@@ -260,6 +299,9 @@ function renderAllProjectsGrid(allProjects, currentId){
       projectsP = await fetchCsv(CONFIG.SPREADSHEET_ID, CONFIG.SHEET_NAME);
     }
     let projects = dataReStructure(projectsP);
+    // let projects = projectsP;
+    console.log(projects)
+    // console.log(projectsP)
     // ensure id fields are strings and normalized
     projects = projects.map(p=>{
       p.id = String(p.id || p.ID || p.a || '').trim();

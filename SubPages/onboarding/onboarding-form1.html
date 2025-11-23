@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Client Onboarding | NIL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="website icon" href="../../portfolio pic/N IMG_20230516_160248.png">
+
+  <!-- Google Font (optional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #050b16;
+      --bg-card: #111827;
+      --accent: #00e5ff;
+      --accent-soft: rgba(0, 229, 255, 0.12);
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --border-subtle: #1f2937;
+      --radius-xl: 18px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.55);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #050b16 42%, #020617 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* HEADER */
+    .nav {
+      padding: 18px 8vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: linear-gradient(to bottom, rgba(5,11,22,0.96), rgba(5,11,22,0.85), transparent);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(15,23,42,0.9);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-logo-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      /* border: 1px solid rgba(148, 163, 184, 0.3); */
+      /* font-size: 0.9rem; */
+      /* font-weight: 700; */
+      /* color: var(--accent);  */
+      cursor:cell;
+    }
+    .nav-logo-badge img{
+      height: inherit;
+    }
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+    .nav-links a{
+      transition: 0.3s;
+    }
+    .links a{
+      transition: 0.3s;
+    }
+    .nav-cta {
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--accent);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      cursor: crosshair;
+    }
+
+    .nav-cta:hover {
+      background: rgba(15, 23, 42, 0.9);
+      border-color: var(--accent);
+    }
+
+    /* MAIN WRAPPER */
+    .page {
+      flex: 1;
+      padding: 36px 8vw 64px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .shell {
+      max-width: 1120px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 325px) {
+      .nav-cta{
+        text-wrap-mode: nowrap;
+        scale: 0.9;
+      }
+    }
+    @media (max-width: 960px) {
+      .shell {
+        grid-template-columns: 1fr;
+      }
+      .page {
+        padding-top: 24px;
+      }
+      .nav {
+        padding-inline: 6vw;
+      }
+    }
+
+    /* LEFT COLUMN – INTRO */
+    .intro-card {
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.16), transparent 60%),
+                  var(--bg-card);
+      border-radius: 24px;
+      padding: 26px 26px 24px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.8);
+      margin-bottom: 16px;
+    }
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px #22c55e;
+    }
+
+    .intro-title {
+      font-size: clamp(1.9rem, 2.3vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .intro-highlight {
+      color: var(--accent);
+    }
+
+    .intro-subtitle {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+
+    .tag-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.8);
+      color: var(--text-muted);
+    }
+
+    .stats {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 18px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .stats strong {
+      display: block;
+      color: var(--accent);
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .primary-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #020617;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(34, 211, 238, 0.55);
+    }
+    .primary-cta span.arrow {
+      font-size: 1.1rem;
+      transform: translateY(1px);
+    }
+
+    .secondary-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 10px;
+      padding-bottom: 2px;
+      border-bottom: 1px dashed rgba(148, 163, 184, 0.7);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    /* RIGHT COLUMN – FORM */
+    .form-card {
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 24px;
+      padding: 18px 18px 10px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+    }
+
+    .form-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-inline: 4px;
+    }
+
+    .form-header-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 999px;
+      color: var(--accent);
+      border: 1px solid rgba(45, 212, 191, 0.7);
+      background: rgba(6, 95, 70, 0.22);
+      text-wrap-mode:nowrap;
+    }
+
+    .form-note {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin: 0 4px 8px;
+    }
+
+    .iframe-wrap {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: #020617;
+    }
+
+    .iframe-wrap iframe {
+      width: 100%;
+      min-height: 720px;
+      border: 0;
+    }
+    @media (min-width: 1080px) {
+      .iframe-wrap iframe {
+      width: 100%;
+      min-height: 595px;
+      border: 0;
+    }
+    }
+    @media (max-width: 640px) {
+      .form-card {
+        padding: 14px 12px 8px;
+      }
+      .iframe-wrap iframe {
+        min-height: 900px;
+      }
+    }
+
+    footer {
+      padding: 12px 8vw 20px;
+      font-size: 0.75rem;
+      color: #6b7280;
+      text-align: center;
+    }
+    footer span {
+      color: var(--accent);
+    }
+    /* Off-canvas left nav */
+.offcanvas {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 320px;
+  max-width: 85vw;
+  background: linear-gradient(180deg,#071019,#021018);
+  box-shadow: 40px 0 80px rgba(0,0,0,0.7);
+  transform: translateX(-110%);
+  transition: transform .32s cubic-bezier(.22,.9,.24,1);
+  z-index: 120;
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border-right: 1px solid rgba(255,255,255,0.02);
+}
+.offcanvas.open { transform: none; }
+.offcanvas .close-btn {
+  align-self: flex-end;
+  background: transparent;
+  border: 0;
+  color: #9ca3af;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 6px;
+}
+
+/* horizontal pill nav inside offcanvas */
+.nav-pills {
+  display: flex;
+  gap: 10px;
+  overflow: auto;
+  padding-bottom: 6px;
+  scroll-snap-type: x mandatory;
+}
+.nav-pills::-webkit-scrollbar {
+    height: 8px
+}
+.nav-pills a {
+  display: inline-block;
+  scroll-snap-align: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.03);
+  color: #9ca3af;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+/* stacked links inside offcanvas */
+.offcanvas .links { display:flex; flex-direction:column; gap:12px; margin-top:10px; }
+.offcanvas a.link { color: #9ca3af; text-decoration: none; padding:10px; border-radius:10px; }
+.offcanvas a.link:hover { color: #00e5ff; background: rgba(255,255,255,0.01); }
+
+/* overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(1,2,4,0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .24s;
+  z-index: 110;
+}
+.overlay.active { opacity: 1; pointer-events: auto; }
+
+/* hide desktop nav links on small screens */
+@media (max-width:700px) {
+  nav.nav-links { display: none; }
+  .brand-name { display: none; } /* optional */
+  .cta { display: none; }
+}
+/* 17/nov/2025 */
+body::-webkit-scrollbar{
+    width: 8px;
+    height: auto;
+    background-color: black;
+}
+body::-webkit-scrollbar-thumb{
+    border-radius: 99px;
+    background-color: #3b3b3b;
+    /* background-color: rgba(128, 128, 128, 0.425); */
+}
+
+.iframe-wrap iframe::-webkit-scrollbar {
+    width: 8px
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="nav">
+    <div class="nav-logo" id="brandButton">
+      <div class="nav-logo-badge"><img src="../../portfolio pic/N IMG_20230516_160248.png" alt=""></div>
+      <span>NíL</span>
+    </div>
+    <nav class="nav-links">
+      <a href="../../INDEX.HTML#home-section">Home</a>
+      <a href="../../INDEX.HTML#services-section">Services</a>
+      <a href="../../INDEX.HTML#portfolio">Portfolio</a>
+      <a href="../../INDEX.HTML#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">CLIENT ONBOARDING</div>
+  </header>
+ 
+    <!-- Off-canvas left navigation -->
+    <div class="offcanvas" id="offcanvas" aria-hidden="true" role="navigation" aria-label="Slide-in menu">
+        <button class="close-btn" id="closeOff" aria-label="Close menu">✕</button>
+        <h3>Menu</h3>
+
+        <!-- horizontal pill slider for nav options -->
+        <div class="nav-pills" aria-hidden="false" tabindex="0">
+            <a href="../../INDEX.HTML#home-section">Home</a>
+            <a href="../../INDEX.HTML#services-section">Services</a>
+            <a href="../../INDEX.HTML#portfolio">Portfolio</a>
+            <a href="../../INDEX.HTML#contact">Contact</a>
+            <a href="../../INDEX.HTML#about">About</a>
+            <!-- <a href="#pricing">Pricing</a> -->
+        </div>
+
+        <!-- stacked links -->
+        <div class="links" role="list">
+            <a class="link" href="../../INDEX.HTML#home-section" role="listitem">Home</a>
+            <a class="link" href="../../INDEX.HTML#services-section" role="listitem">Services</a>
+            <a class="link" href="../../INDEX.HTML#portfolio" role="listitem">Portfolio</a>
+            <a class="link" href="../../INDEX.HTML#contact" role="listitem">Contact</a>
+        </div>
+    </div>
+    <div class="overlay" id="overlay" tabindex="-1" aria-hidden="true"></div>
+
+
+  <!-- MAIN CONTENT -->
+  <main class="page">
+    <div class="shell">
+
+      <!-- LEFT COLUMN: INTRO TEXT -->
+      <section class="intro-card">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          New Project • Client Onboarding
+        </div>
+
+        <h1 class="intro-title">
+          Let’s start your next <span class="intro-highlight">Web, SaaS, Consultancy, Hacking</span> or
+          <span class="intro-highlight">Video Editing</span> project.
+        </h1>
+
+        <p class="intro-subtitle">
+          Fill out this short form so I can understand your goals, scope and timeline.
+          I’ll review everything personally and get back to you with next steps,
+          proposed approach and an accurate quote.
+        </p>
+
+        <div class="tag-grid">
+          <div class="tag">Web Development</div>
+          <div class="tag">SaaS Apps</div>
+          <div class="tag">Consultancy</div>
+          <div class="tag">Bug Bounty / Hacking</div>
+          <div class="tag">Video Editing</div>
+        </div>
+
+        <div class="stats">
+          <div>
+            <strong>3–5 min</strong>
+            to complete
+          </div>
+          <div>
+            <strong>1:1</strong>
+            communication via email / WhatsApp
+          </div>
+        </div>
+
+        <button class="primary-cta" onclick="document.getElementById('onboard-form').scrollIntoView({behavior:'smooth'});">
+          Start the onboarding form
+          <span class="arrow">↳</span>
+        </button>
+
+        <div class="secondary-link" onclick="document.getElementById('onboard-form').scrollIntoView({behavior:'smooth'});">
+          or scroll down to the form
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN: EMBEDDED GOOGLE FORM -->
+      <section class="form-card" id="onboard-form">
+        <div class="form-header">
+          <div class="form-header-title">Client Onboarding Form</div>
+          <div class="badge">Secure • Google Forms</div>
+        </div>
+        <p class="form-note">
+          Your details stay confidential and are only used to evaluate your project and contact you back.
+        </p>
+
+        <div class="iframe-wrap">
+          <!-- 🔽🔽 REPLACE this iframe with the one you copied from Google Forms (Send → <> Embed) 🔽🔽 -->
+          <iframe 
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfZ9o1wFqiqZYlHJYoIEYw0Zjm_h3gFFOI2H1uNP_oo91qliw/viewform?embedded=true" 
+            frameborder="0" 
+            marginheight="0" 
+            marginwidth="0">
+              Loading…
+          </iframe>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    © <span>NiL</span> – Client onboarding for Web, SaaS, Consultancy, Hacking & Video Editing projects.
+  </footer>
+
+<script>
+  const brandBtn = document.getElementById('brandButton');
+  const off = document.getElementById('offcanvas');
+  const overlay = document.getElementById('overlay');
+  const closeBtn = document.getElementById('closeOff');
+  const scrollToFormBtn = document.getElementById('scrollToForm');
+
+  function openOff(){
+    off.classList.add('open');
+    overlay.classList.add('active');
+    off.setAttribute('aria-hidden','false');
+    overlay.setAttribute('aria-hidden','false');
+    setTimeout(()=> {
+      const first = off.querySelector('.links a');
+      if(first) first.focus();
+    },240);
+  }
+  function closeOffCanvas(){
+    off.classList.remove('open');
+    overlay.classList.remove('active');
+    off.setAttribute('aria-hidden','true');
+    overlay.setAttribute('aria-hidden','true');
+    brandBtn.focus();
+  }
+
+  brandBtn.addEventListener('click', openOff);
+  brandBtn.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openOff(); }
+  });
+
+  overlay.addEventListener('click', closeOffCanvas);
+  closeBtn.addEventListener('click', closeOffCanvas);
+
+  // scroll to form
+  if (scrollToFormBtn) {
+    scrollToFormBtn.addEventListener('click', ()=> {
+      const f = document.getElementById('formHolder');
+      if(f) f.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  }
+
+  // swipe detection from left to right to open offcanvas (touch only)
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchMoved = false;
+
+  window.addEventListener('touchstart', function(e){
+    if(!e.touches || e.touches.length === 0) return;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchMoved = false;
+  }, {passive:true});
+
+  window.addEventListener('touchmove', function(e){
+    touchMoved = true;
+  }, {passive:true});
+
+  window.addEventListener('touchend', function(e){
+    if(!touchMoved) return;
+    const touchEndX = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : 0;
+    const touchEndY = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientY : 0;
+    const dx = touchEndX - touchStartX;
+    const dy = touchEndY - touchStartY;
+    if(touchStartX < 60 && Math.abs(dy) < 80 && dx > 80){
+      openOff();
+    }
+  }, {passive:true});
+
+  // close on Escape
+  window.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && off.classList.contains('open')) closeOffCanvas();
+  });
+
+  // trap focus (simple)
+  document.addEventListener('focusin', (e)=> {
+    if(off.classList.contains('open') && !off.contains(e.target)) {
+      const f = off.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
+      if(f) f.focus();
+    }
+  });
+
+  // close nav when clicking a nav link
+  off.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click', ()=> { closeOffCanvas(); });
+  });
+
+  // keyboard left/right for pill slider
+  const pillRow = document.querySelector('.nav-pills');
+  if(pillRow){
+    pillRow.addEventListener('keydown', (e)=>{
+      if(e.key === 'ArrowRight') pillRow.scrollBy({left:120, behavior:'smooth'});
+      if(e.key === 'ArrowLeft') pillRow.scrollBy({left:-120, behavior:'smooth'});
+    });
+  }
+</script>
+
+</body>
+</html>
+ <!-- https://docs.google.com/forms/d/e/1FAIpQLSfZ9o1wFqiqZYlHJYoIEYw0Zjm_h3gFFOI2H1uNP_oo91qliw/viewform -->
+<!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfZ9o1wFqiqZYlHJYoIEYw0Zjm_h3gFFOI2H1uNP_oo91qliw/viewform?embedded=true" width="640" height="5228" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe> -->
+      <!-- Optional: link back to home page -->

@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Client Onboarding | NiL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-1: #050b16;
+            --card: #0f1720;
+            --accent: #00e5ff;
+            --muted: #9ca3af;
+            --panel: #071019;
+            --radius: 20px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+            color: #ecfdfd;
+            background: radial-gradient(circle at top left, #071023, #030612 60%);
+        }
+
+        /* TOP NAV */
+        header.nav {
+            position: sticky;
+            top: 0;
+            z-index: 60;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 6vw;
+            background: linear-gradient(180deg, rgba(2, 6, 12, 0.85), rgba(2, 6, 12, 0.55));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(6px);
+        }
+
+        .brand {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .logo-badge {
+            width: 36px;
+            height: 36px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, rgba(0, 229, 255, 0.09), rgba(0, 255, 220, 0.02));
+            border: 1px solid rgba(0, 229, 255, 0.12);
+            color: var(--accent);
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.06);
+        }
+
+        .brand-name {
+            font-weight: 700;
+            letter-spacing: .06em
+        }
+
+        /* desktop nav links */
+        nav.links {
+            display: flex;
+            gap: 26px;
+            align-items: center;
+            color: var(--muted)
+        }
+
+        nav.links a {
+            color: var(--muted);
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 8px
+        }
+
+        nav.links a:hover {
+            color: var(--accent)
+        }
+
+        .cta {
+            padding: 8px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(0, 229, 255, 0.12);
+            color: var(--accent);
+            font-weight: 600
+        }
+
+        /* page layout */
+        main.page {
+            padding: 34px 6vw;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: calc(100vh - 84px);
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.05fr 1.45fr;
+            gap: 32px;
+            align-items: start
+        }
+
+        .card {
+            background: linear-gradient(180deg, rgba(16, 24, 32, 0.9), rgba(7, 12, 18, 0.95));
+            border-radius: var(--radius);
+            padding: 26px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        /* left intro */
+        .intro .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--muted);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            margin-bottom: 14px
+        }
+
+        .intro h1 {
+            font-size: clamp(26px, 4vw, 46px);
+            line-height: 1.02;
+            margin: 0 0 14px;
+            font-weight: 800
+        }
+
+        .intro .accent {
+            color: var(--accent)
+        }
+
+        .intro p {
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 18px
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 14px
+        }
+
+        .tag {
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        .intro .meta {
+            display: flex;
+            gap: 18px;
+            color: var(--muted);
+            margin-top: 8px
+        }
+
+        .primary-cta {
+            margin-top: 14px;
+            padding: 10px 18px;
+            border-radius: 999px;
+            background: var(--accent);
+            border: none;
+            color: #041016;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 20px 40px rgba(0, 229, 255, 0.08)
+        }
+
+        /* form card */
+        .form-wrap {
+            padding: 14px
+        }
+
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px
+        }
+
+        .badge {
+            background: rgba(0, 229, 255, 0.04);
+            border: 1px solid rgba(0, 229, 255, 0.08);
+            padding: 6px 10px;
+            border-radius: 999px;
+            color: var(--accent);
+            font-weight: 600
+        }
+
+        .iframe-holder {
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            background: #02040a;
+            padding: 8px
+        }
+
+        .iframe-holder iframe {
+            width: 100%;
+            height: 720px;
+            border: 0;
+            display: block
+        }
+
+        /* Off-canvas left nav */
+        .offcanvas {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 320px;
+            max-width: 85vw;
+            background: linear-gradient(180deg, var(--panel), #021018);
+            box-shadow: 40px 0 80px rgba(0, 0, 0, 0.7);
+            transform: translateX(-110%);
+            transition: transform .32s cubic-bezier(.22, .9, .24, 1);
+            z-index: 120;
+            padding: 22px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            border-right: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .offcanvas.open {
+            transform: none
+        }
+
+        .offcanvas .close-btn {
+            align-self: flex-end;
+            background: transparent;
+            border: 0;
+            color: var(--muted);
+            font-weight: 700;
+            cursor: pointer;
+            padding: 6px
+        }
+
+        .offcanvas h3 {
+            color: var(--accent);
+            margin: 6px 0 4px
+        }
+
+        .nav-pills {
+            display: flex;
+            gap: 10px;
+            overflow: auto;
+            padding-bottom: 6px;
+            scroll-snap-type: x mandatory
+        }
+
+        .nav-pills::-webkit-scrollbar {
+            height: 8px
+        }
+
+        .nav-pills a {
+            display: inline-block;
+            scroll-snap-align: center;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            color: var(--muted);
+            white-space: nowrap;
+            text-decoration: none
+        }
+
+        .offcanvas .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px
+        }
+
+        .offcanvas a.link {
+            color: var(--muted);
+            padding: 10px;
+            border-radius: 10px;
+            text-decoration: none
+        }
+
+        .offcanvas a.link:hover {
+            color: var(--accent);
+            background: rgba(255, 255, 255, 0.01)
+        }
+
+        /* overlay when offcanvas open */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(1, 2, 4, 0.5);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .24s;
+            z-index: 110
+        }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: auto
+        }
+
+        /* responsive rules */
+        @media (max-width: 1000px) {
+            .container {
+                max-width: 1000px
+            }
+
+            .iframe-holder iframe {
+                height: 720px
+            }
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 18px
+            }
+
+            nav.links {
+                display: none
+            }
+
+            /* hide desktop nav links on small screens */
+            .offcanvas {
+                width: 84vw
+            }
+
+            .iframe-holder iframe {
+                min-height: 900px
+            }
+
+            header.nav {
+                padding: 12px 4vw
+            }
+
+            .brand-name {
+                display: none
+            }
+
+            /* .cta {
+                display: none
+            } */
+
+            .intro h1 {
+                font-size: 30px
+            }
+        }
+
+        /* improvements for large screens alignment */
+        @media (min-width:1200px) {
+            main.page {
+                padding-top: 44px
+            }
+
+            .container {
+                align-items: start
+            }
+
+            .card {
+                padding: 30px
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="nav" aria-label="Main navigation">
+        <div class="brand" id="brandButton" role="button" aria-label="Open navigation" tabindex="0">
+            <div class="logo-badge" id="logoBadge">N</div>
+            <div class="brand-name">NiL</div>
+        </div>
+
+        <nav class="links" aria-hidden="false">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="cta">CLIENT ONBOARDING</div>
+    </header>
+
+    <!-- Off-canvas left navigation -->
+    <div class="offcanvas" id="offcanvas" aria-hidden="true" role="navigation" aria-label="Slide-in menu">
+        <button class="close-btn" id="closeOff" aria-label="Close menu">✕</button>
+        <h3>Menu</h3>
+
+        <!-- horizontal pill slider for nav options -->
+        <div class="nav-pills" aria-hidden="false" tabindex="0">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#contact">Contact</a>
+            <a href="#about">About</a>
+            <a href="#pricing">Pricing</a>
+        </div>
+
+        <!-- stacked links -->
+        <div class="links" role="list">
+            <a class="link" href="#home" role="listitem">Home</a>
+            <a class="link" href="#services" role="listitem">Services</a>
+            <a class="link" href="#portfolio" role="listitem">Portfolio</a>
+            <a class="link" href="#contact" role="listitem">Contact</a>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay" tabindex="-1" aria-hidden="true"></div>
+
+    <main class="page">
+        <div class="container">
+
+            <!-- left column -->
+            <section class="card intro">
+                <div class="pill"><span
+                        style="display:inline-block;width:10px;height:10px;border-radius:999px;background:#22c55e;margin-right:6px"></span>New
+                    Project • Client Onboarding</div>
+                <h1>Let's start your next <span class="accent">Web, SaaS, Consultancy, Hacking</span> or <span
+                        class="accent">Video Editing</span> project.</h1>
+                <p>Fill out this short form so I can understand your goals, scope and timeline. I’ll review everything
+                    personally and get back to you with next steps, proposed approach and an accurate quote.</p>
+
+                <div class="tags" aria-hidden="false">
+                    <div class="tag">Web Development</div>
+                    <div class="tag">SaaS Apps</div>
+                    <div class="tag">Consultancy</div>
+                    <div class="tag">Bug Bounty / Hacking</div>
+                    <div class="tag">Video Editing</div>
+                </div>
+
+                <div class="meta">
+                    <div><strong style="color:var(--accent)">3–5 min</strong>
+                        <div style="font-size:13px;color:var(--muted)">to complete</div>
+                    </div>
+                    <div><strong style="color:var(--accent)">1:1</strong>
+                        <div style="font-size:13px;color:var(--muted)">communication via email / WhatsApp</div>
+                    </div>
+                </div>
+
+                <button class="primary-cta" id="scrollToForm">Start the onboarding form ↳</button>
+            </section>
+
+            <!-- right column -->
+            <section class="card form-wrap">
+                <div class="form-header">
+                    <div style="font-weight:700">Client Onboarding Form</div>
+                    <div class="badge">Secure • Google Forms</div>
+                </div>
+
+                <p style="color:var(--muted);margin-top:0;margin-bottom:8px">Your details stay confidential and are only
+                    used to evaluate your project and contact you back.</p>
+
+                <div class="iframe-holder" id="formHolder" aria-live="polite">
+                    <!-- REPLACE the src below with your form iframe src (Send → Embed) -->
+                    <iframe
+                        src="https://docs.google.com/forms/d/e/1FAIpQLSfZ9o1wFqiqZYlHJYoIEYw0Zjm_h3gFFOI2H1uNP_oo91qliw/viewform?embedded=true"
+                        title="Client Onboarding Form" loading="lazy"></iframe>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer style="padding:18px 6vw;color:var(--muted);text-align:center;border-top:1px solid rgba(255,255,255,0.02)">
+        © <strong style="color:var(--accent)">NiL</strong> — Client onboarding for Web, SaaS, Consultancy, Hacking &
+        Video Editing.
+    </footer>
+
+    <script>
+        // Elements
+        const brandBtn = document.getElementById('brandButton');
+        const off = document.getElementById('offcanvas');
+        const overlay = document.getElementById('overlay');
+        const closeBtn = document.getElementById('closeOff');
+        const scrollToFormBtn = document.getElementById('scrollToForm');
+
+        function openOff() {
+            off.classList.add('open');
+            overlay.classList.add('active');
+            off.setAttribute('aria-hidden', 'false');
+            overlay.setAttribute('aria-hidden', 'false');
+            // focus first link inside
+            setTimeout(() => {
+                const first = off.querySelector('.links a');
+                if (first) first.focus();
+            }, 240);
+        }
+        function closeOffCanvas() {
+            off.classList.remove('open');
+            overlay.classList.remove('active');
+            off.setAttribute('aria-hidden', 'true');
+            overlay.setAttribute('aria-hidden', 'true');
+            brandBtn.focus();
+        }
+
+        brandBtn.addEventListener('click', openOff);
+        brandBtn.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openOff(); }
+        });
+
+        overlay.addEventListener('click', closeOffCanvas);
+        closeBtn.addEventListener('click', closeOffCanvas);
+
+        // scroll to form anchor
+        scrollToFormBtn.addEventListener('click', () => {
+            document.getElementById('formHolder').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        // swipe detection from left to right to open offcanvas (touch only)
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchMoved = false;
+
+        window.addEventListener('touchstart', function (e) {
+            if (!e.touches || e.touches.length === 0) return;
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            touchMoved = false;
+        }, { passive: true });
+
+        window.addEventListener('touchmove', function (e) {
+            touchMoved = true;
+        }, { passive: true });
+
+        window.addEventListener('touchend', function (e) {
+            if (!touchMoved) return;
+            const touchEndX = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : 0;
+            const touchEndY = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientY : 0;
+            const dx = touchEndX - touchStartX;
+            const dy = touchEndY - touchStartY;
+            // only consider mostly-horizontal swipes and a reasonable start near left edge
+            if (touchStartX < 60 && Math.abs(dy) < 80 && dx > 80) {
+                openOff();
+            }
+        }, { passive: true });
+
+        // close on Escape
+        window.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && off.classList.contains('open')) closeOffCanvas();
+        });
+
+        // accessibility: trap focus inside offcanvas when open (simple)
+        document.addEventListener('focusin', (e) => {
+            if (off.classList.contains('open') && !off.contains(e.target)) {
+                // move focus back into offcanvas
+                const f = off.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
+                if (f) f.focus();
+            }
+        });
+
+        // allow clicking any offcanvas link to auto-close
+        off.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                closeOffCanvas();
+            });
+        });
+
+        // horizontal pill slider: enable keyboard arrow navigation
+        const pillRow = document.querySelector('.nav-pills');
+        if (pillRow) {
+            pillRow.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') pillRow.scrollBy({ left: 120, behavior: 'smooth' });
+                if (e.key === 'ArrowLeft') pillRow.scrollBy({ left: -120, behavior: 'smooth' });
+            });
+        }
+    </script>
+
+</body>
+
+</html>

@@ -763,12 +763,14 @@ section{
 
 .portfolio-layer h4{
     font-size: 3rem;
+    text-shadow: 1px 1.5px 6px black;
 }
 
 .portfolio-layer p{
     /* text-wrap-mode: wrap; */
     font-size: 1.6rem;
     margin: 0.3rem 0 1rem;
+    text-shadow: 1px 1px 4px black;
 }
 
 .portfolio-layer a {
